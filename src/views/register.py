@@ -1,4 +1,6 @@
 import flet as ft
+
+from src.components import Button, TextButton, Input
 from src.schemas import UserCreateSchema
 from src.controllers import UserController
 
@@ -6,13 +8,11 @@ from src.controllers import UserController
 def main(page: ft.Page):
     controller = UserController()
 
-    name = ft.TextField(label="Nome", width=350)
-    email = ft.TextField(label="E-mail", width=350)
-    password = ft.TextField(
+    name = Input(label="Nome")
+    email = Input(label="E-mail")
+    password = Input(
         label="Senha",
-        width=350,
         password=True,
-        can_reveal_password=True
     )
     message = ft.Text("")
 
@@ -31,18 +31,25 @@ def main(page: ft.Page):
         message.update()
 
     page.add(
-        ft.Column(
-            [
-                name, email, password,
-                ft.ElevatedButton(text="Criar conta", on_click=submit),
-                ft.TextButton(
-                    text="Voltar",
-                    on_click=lambda e: page.go("/login")
-                ),
-                message
-            ],
-            alignment=ft.MainAxisAlignment.CENTER,
-            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-        )
+        ft.Container(
+            ft.Column(
+                [
+                    name, email, password,
+                    Button(text="Criar conta", on_click=submit),
+                    TextButton(
+                        text="Voltar",
+                        on_click=lambda e: page.go("/login")
+                    ),
+                    message
+                ],
+                alignment=ft.MainAxisAlignment.CENTER,
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            ),
+            expand=True,
+            bgcolor=ft.Colors.BLACK54,
+            alignment=ft.alignment.center,
+        ),
+
+
     )
     page.update()

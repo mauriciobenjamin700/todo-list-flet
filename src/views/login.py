@@ -1,5 +1,6 @@
 import flet as ft
 
+from src.components import Button, TextButton, Input
 from src.controllers import UserController
 from src.schemas import LoginSchema
 
@@ -9,21 +10,12 @@ def main(page: ft.Page):
 
     page.title = "Login"
 
-    email_input = ft.TextField(
+    email_input = Input(
         label="E-mail",
-        width=350,
-        bgcolor=ft.Colors.WHITE,
-        border=ft.border.all(1, ft.Colors.BLACK26),
-        color=ft.Colors.BLACK,
-
     )
-    password_input = ft.TextField(
+    password_input = Input(
         label="Senha",
-        width=350,
-        bgcolor=ft.Colors.WHITE,
-        border=ft.border.all(1, ft.Colors.BLACK26),
-        color=ft.Colors.BLACK,
-        password=True, can_reveal_password=True
+        password=True,
     )
     message = ft.Text("", color=ft.Colors.RED_300)
 
@@ -40,18 +32,14 @@ def main(page: ft.Page):
             message.color = ft.Colors.RED_300
         message.update()
 
-    login_button = ft.ElevatedButton(
+    login_button = Button(
         text="Entrar",
         on_click=login_click,
-        width=350,
-        bgcolor=ft.Colors.BLUE_700,
-        color=ft.Colors.WHITE,
     )
 
-    create_account_button = ft.TextButton(
+    create_account_button = TextButton(
         text="Não tem conta ainda? Crie uma agora!",
         on_click=lambda e: page.go("/register"),
-        width=350,
     )
 
     page.add(
