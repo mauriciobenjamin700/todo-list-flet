@@ -13,6 +13,23 @@ from src.utils import PasswordHasher, TokenHandler
 
 
 class UserService:
+    """
+    Service class for managing user operations.
+
+    Attributes:
+        user_repository (UserRepository): The repository for user data access.
+
+    Methods:
+        - add
+        - get
+        - list
+        - update
+        - delete
+        - authenticate
+        - generate_token
+        - decode_token
+        - map_to_response
+    """
     def __init__(self, user_repository: UserRepository):
         self.user_repository = user_repository
 

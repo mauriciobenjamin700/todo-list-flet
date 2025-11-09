@@ -169,3 +169,5 @@ storage/
 ## Files
 
 .env
+
+*.db

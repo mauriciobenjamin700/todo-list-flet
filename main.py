@@ -1,3 +1,8 @@
-from subprocess import run
+import flet as ft
 
-run(["uv", "run", "flet", "run", "--web", "--port", "8080"])
+from src import initialize_database
+from src.views import login_view
+
+initialize_database()
+
+ft.app(login_view)

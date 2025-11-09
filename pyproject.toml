@@ -11,6 +11,7 @@ dependencies = [
   "bcrypt>=5.0.0",
   "flet==0.28.3",
   "pydantic-settings>=2.11.0",
+  "pydantic[email]>=2.12.4",
   "python-jose>=3.5.0",
 ]
 
