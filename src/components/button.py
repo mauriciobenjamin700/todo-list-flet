@@ -3,6 +3,9 @@ import flet as ft
 
 
 class Button(ft.ElevatedButton):
+    """
+    A styled button with predefined width and colors.
+    """
     def __init__(
         self,
         text: str,
@@ -21,6 +24,9 @@ class Button(ft.ElevatedButton):
 
 
 class TextButton(ft.TextButton):
+    """
+    A styled text button with predefined width.
+    """
     def __init__(
         self,
         text: str,

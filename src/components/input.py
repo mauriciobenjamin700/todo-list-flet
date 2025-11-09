@@ -2,6 +2,9 @@ import flet as ft
 
 
 class Input(ft.TextField):
+    """
+    A styled input field with predefined width and colors.
+    """
     def __init__(self, label: str, password: bool = False):
         super().__init__(
             label=label,
