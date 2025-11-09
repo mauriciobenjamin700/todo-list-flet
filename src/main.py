@@ -1,51 +1,27 @@
 import flet as ft
-
-from src.controllers import UserController
-from src.schemas import LoginSchema
+from src.views import login_view, register_view
 
 
 def main(page: ft.Page):
-    controller = UserController()
+    page.title = "Meu App"
 
-    page.title = "Login"
+    def route_change(e):
+        # Limpa a página antes de carregar a nova view
+        page.controls.clear()
 
-    email_input = ft.TextField(label="Email", width=300)
-    password_input = ft.TextField(
-        label="Password", width=300, password=True, can_reveal_password=True
-    )
-    message = ft.Text("", color=ft.Colors.RED_300)
+        if page.route == "/" or page.route == "/login":
+            login_view(page)
+        elif page.route == "/register":
+            register_view(page)
+        else:
+            page.add(ft.Text("Rota não encontrada"))
 
-    def login_click(e):
-        login_data = LoginSchema(
-            email=email_input.value, password=password_input.value
-        )
-        try:
-            user = controller.login(login_data)
-            message.value = f"Welcome, {user.name}!"
-            message.color = ft.Colors.GREEN_300
-        except Exception as ex:
-            message.value = str(ex)
-            message.color = ft.Colors.RED_300
-        message.update()
+        page.update()
 
-    login_button = ft.ElevatedButton(
-        text="Login", on_click=login_click
-    )
+    page.on_route_change = route_change
 
-    create_account_button = ft.TextButton(
-        text="Create Account",
-        on_click=lambda e: page.go("/register")
-    )
-
-    page.add(
-        email_input,
-        password_input,
-        login_button,
-        message,
-        create_account_button,
-    )
-
-    page.update()
-
-
-ft.app(main)
+    # inicia na rota atual ou na rota raiz
+    if not page.route or page.route == "/":
+        page.go("/login")
+    else:
+        page.go(page.route)

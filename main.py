@@ -1,8 +1,7 @@
 import flet as ft
 
-from src import initialize_database
-from src.views import login_view
+from src import initialize_database, main_app
 
 initialize_database()
 
-ft.app(login_view)
+ft.app(main_app)
