@@ -8,8 +8,10 @@ authors = [
     { name = "Flet developer", email = "you@example.com" }
 ]
 dependencies = [
+  "bcrypt>=5.0.0",
   "flet==0.28.3",
   "pydantic-settings>=2.11.0",
+  "python-jose>=3.5.0",
 ]
 
 [tool.flet]

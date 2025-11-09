@@ -1,3 +1,8 @@
+from .auth import (
+    LoginSchema,
+    TokenDataSchema,
+    TokenSchema
+)
 from .user import (
     UserCreateSchema,
     UserDBSchema,
@@ -11,4 +16,7 @@ __all__ = [
     "UserUpdateSchema",
     "UserDBSchema",
     "UserResponseSchema",
+    "LoginSchema",
+    "TokenDataSchema",
+    "TokenSchema"
 ]
