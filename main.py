@@ -1,6 +1,3 @@
-def main():
-    print("Hello from todo-list-flet!")
+from subprocess import run
 
-
-if __name__ == "__main__":
-    main()
+run(["uv", "run", "flet", "run", "--web", "--port", "8080"])
