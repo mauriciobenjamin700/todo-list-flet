@@ -1,7 +1,6 @@
 import flet as ft
 from logging import Logger
 from pydantic import ValidationError
-from time import sleep
 
 from src.components import (
     Button,
@@ -38,21 +37,19 @@ def main(page: ft.Page):
                 email=email_input.value, password=password_input.value
             )
             user = controller.login(login_data)
-            message.value = f"Bem vindo(a), {user.name}!"
-            message.color = ft.Colors.GREEN_300
-            message.update()
-            sleep(2)
+            page.client_storage.set(constants.USER_DATA, user)
             page.go(constants.HOME_PAGE)
 
         except ValidationError as ve:
             message.value = "Parece que tem algo de errado com seu e-mail"
             message.color = ft.Colors.RED_300
             LOGGER.error(f"Validation error during login: {ve}")
+            message.update()
 
         except Exception as ex:
             message.value = str(ex)
             message.color = ft.Colors.RED_300
-        message.update()
+            message.update()
 
     login_button = Button(
         text="Entrar",
