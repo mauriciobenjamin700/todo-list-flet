@@ -8,8 +8,9 @@ from src.components import (
     CenterContainer,
     VerticalContainer
 )
-from src.schemas import UserCreateSchema
 from src.controllers import UserController
+from src.core import constants
+from src.schemas import UserCreateSchema
 
 
 def main(page: ft.Page):
@@ -32,7 +33,7 @@ def main(page: ft.Page):
             )
             controller.add(data)
             message.value = "Conta criada com sucesso!"
-            page.go("/login")
+            page.go(constants.LOGIN_PAGE)
         except ValidationError:
             message.value = "Parece que tem algo de errado com seus dados"
             message.color = ft.Colors.RED_300
@@ -49,7 +50,7 @@ def main(page: ft.Page):
                     Button(text="Criar conta", on_click=submit),
                     TextButton(
                         text="Voltar",
-                        on_click=lambda e: page.go("/login")
+                        on_click=lambda e: page.go(constants.LOGIN_PAGE)
                     ),
                     message
                 ],

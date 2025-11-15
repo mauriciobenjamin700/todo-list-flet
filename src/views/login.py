@@ -1,5 +1,7 @@
 import flet as ft
+from logging import Logger
 from pydantic import ValidationError
+from time import sleep
 
 from src.components import (
     Button,
@@ -9,7 +11,11 @@ from src.components import (
     Input
 )
 from src.controllers import UserController
+from src.core import constants
 from src.schemas import LoginSchema
+
+
+LOGGER = Logger(__name__, level="INFO")
 
 
 def main(page: ft.Page):
@@ -34,9 +40,14 @@ def main(page: ft.Page):
             user = controller.login(login_data)
             message.value = f"Bem vindo(a), {user.name}!"
             message.color = ft.Colors.GREEN_300
+            message.update()
+            sleep(2)
+            page.go(constants.HOME_PAGE)
+
         except ValidationError as ve:
             message.value = "Parece que tem algo de errado com seu e-mail"
             message.color = ft.Colors.RED_300
+            LOGGER.error(f"Validation error during login: {ve}")
 
         except Exception as ex:
             message.value = str(ex)
@@ -50,7 +61,7 @@ def main(page: ft.Page):
 
     create_account_button = TextButton(
         text="Não tem conta ainda? Crie uma agora!",
-        on_click=lambda e: page.go("/register"),
+        on_click=lambda e: page.go(constants.REGISTER_PAGE),
     )
 
     page.add(

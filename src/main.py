@@ -1,5 +1,7 @@
 import flet as ft
-from src.views import login_view, register_view
+
+from src.core import constants
+from src.views import home_view, login_view, register_view
 
 
 def main(page: ft.Page):
@@ -9,10 +11,12 @@ def main(page: ft.Page):
         # Limpa a página antes de carregar a nova view
         page.controls.clear()
 
-        if page.route == "/" or page.route == "/login":
+        if page.route == "/" or page.route == constants.LOGIN_PAGE:
             login_view(page)
-        elif page.route == "/register":
+        elif page.route == constants.REGISTER_PAGE:
             register_view(page)
+        elif page.route == constants.HOME_PAGE:
+            home_view(page)
         else:
             page.add(ft.Text("Rota não encontrada"))
 
@@ -22,6 +26,6 @@ def main(page: ft.Page):
 
     # inicia na rota atual ou na rota raiz
     if not page.route or page.route == "/":
-        page.go("/login")
+        page.go(constants.LOGIN_PAGE)
     else:
         page.go(page.route)
